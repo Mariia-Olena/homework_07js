@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const collection = ['ivan', 'olga', 'petr', 'oleg', 'serj'];
+
+        function addItem(index, item) {
+            for (i = collection.length; i > index; i--) {
+                collection[i] = collection[i - 1];
+            }
+            collection[index] = item;
+            return collection;
+        }
+        const addItemResult = addItem(1, 'alex');
+        console.log(addItemResult);
+
+        function addArrayItem(index, item) {
+            const tmpArraySecondPart = [];
+            for (i = index; i < collection.length; i++) {
+                tmpArraySecondPart[tmpArraySecondPart.length] = collection[i];
+            }
+            collection.length = index;
+            collection[collection.length] = item;
+            for (i = 0; i < tmpArraySecondPart.length; i++) {
+                collection[collection.length] = tmpArraySecondPart[i];
+            }
+            return collection;
+        }
+        const addArrayItemResult = addArrayItem(4, 'alex');
+        console.log(addArrayItemResult);
+
+        function indexOf(item, from = 0) {
+            let index;
+            let result = -1;
+            if (from >= 0) {
+                index = from;
+            } else if(from < 0) {
+                index = collection.length + from;
+            }
+            for (i = index; i < collection.length; i++) {
+                if (collection[i] === item) {
+                    result = i;
+                    break;
+                }
+            }
+            return result;
+        }
+        const indexOfResult = indexOf('alex', 0)
+        console.log('indexOf: ' + indexOfResult);
+
+        function  lastIndexOf(item, from = collection.length) {
+            let index;
+            let result = -1;
+            if (from >= 0) {
+                index = from;
+            } else if(from <= 0) {
+                index = collection.length + from;
+            }
+            for (i = index;  i >= 0; i--) {
+                if (collection[i] === item) {
+                    result = i;
+                    break;
+                }
+            }
+            return result;
+        }
+        const lastIndexOfResult = lastIndexOf('alex', -1)
+        console.log('lastIndexOf: ' + lastIndexOfResult);
+
+        function  includes(item, from = 0) {
+            let result = false;
+            if (from >= 0) {
+                index = from;
+            } else if(from < 0) {
+                index = collection.length + from;
+            }
+            for (i = index; i < collection.length; i++) {
+                if (collection[i] === item) {
+                    result = true;
+                    break;
+                }
+            }
+            return result;
+        }
+        const includesResult = includes('alex', 0)
+        console.log('includes: ' + includesResult);
+    </script>
+</body>
+</html>
